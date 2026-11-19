@@ -29,6 +29,11 @@ app.all('/api/health', (req, res) => {
   return handler(req, res);
 });
 
+app.all('/api/dimona-webhook', (req, res) => {
+  const handler = require('./api/dimona-webhook.js');
+  return handler(req, res);
+});
+
 // Servir arquivos estáticos do Customizador 3D
 app.use(express.static(path.join(__dirname, '3d-customizer')));
 
