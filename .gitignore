@@ -1,0 +1,28 @@
+# Dependências
+node_modules/
+npm-debug.log*
+
+# Segredos e chaves de API
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build e cache Vercel
+.vercel
+
+# Arquivos temporários de teste e scratch
+scratch/
+scratch_*.py
+test_*.png
+sweep_*.png
+verify_*.png
+final_*.png
+hoodie_*.png
+shot_*.png
+*.bak*
+
+# Sistema Operacional
+.DS_Store
+Thumbs.db

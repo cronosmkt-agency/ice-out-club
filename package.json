@@ -1,0 +1,26 @@
+{
+  "name": "ice-out-club-store",
+  "version": "1.0.0",
+  "description": "ICE OUT CLUB — E-commerce & Customizador 3D com Stripe e Dimona Dropsimples",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "stripe": "^14.25.0"
+  },
+  "keywords": [
+    "streetwear",
+    "ecommerce",
+    "threejs",
+    "stripe",
+    "pix",
+    "dimona",
+    "print-on-demand"
+  ],
+  "author": "ICE OUT CLUB",
+  "license": "ISC"
+}

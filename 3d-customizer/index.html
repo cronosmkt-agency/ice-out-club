@@ -1,0 +1,2992 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>ICE OUT CLUB — Official Streetwear Store</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-studio: #f5f5f7;
+      --bg-studio-grad: radial-gradient(circle at 50% 38%, #ffffff 0%, #f2f2f5 60%, #e6e7eb 100%);
+      --card-white: #ffffff;
+      --text-black: #000000;
+      --text-muted: #8e8e93;
+      --text-subtle: #636366;
+      --pill-inactive-bg: #e5e5ea;
+      --border-dark: #2c2c2e;
+      --pix-teal: #32bcad;
+      --font-main: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: var(--bg-studio);
+      background: var(--bg-studio-grad);
+      font-family: var(--font-main);
+      color: var(--text-black);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    #page-wrapper {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* --- TOP NAVBAR --- */
+    .top-nav {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 70px;
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 50;
+      background: rgba(245, 245, 247, 0.45);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .brand-logo-wrap {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand-logo-img {
+      height: 32px;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.06));
+    }
+
+    /* Category Pill Selector */
+    .category-nav {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 14px;
+      z-index: 55;
+    }
+
+    .category-pills-bar {
+      display: flex;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-radius: 9999px;
+      padding: 4px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      gap: 6px;
+      position: relative;
+    }
+
+    .cat-pill {
+      border: none;
+      background: none;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-muted);
+      padding: 7px 18px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .cat-pill:hover {
+      color: #000000;
+    }
+
+    .cat-pill.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    .cat-indicator-dot {
+      width: 26px;
+      height: 4px;
+      background: #000000;
+      border-radius: 9999px;
+      margin-top: 5px;
+      transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      display: block;
+    }
+
+    /* Right Action Icons */
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icon-btn {
+      background: none;
+      border: none;
+      color: #1c1c1e;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      transition: background 0.2s;
+    }
+
+    .icon-btn:hover {
+      background: rgba(0, 0, 0, 0.04);
+    }
+
+    .icon-btn svg {
+      width: 22px;
+      height: 22px;
+      stroke: #1c1c1e;
+      stroke-width: 2;
+    }
+
+    .bag-badge {
+      position: absolute;
+      top: 1px;
+      right: 1px;
+      background: #000000;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 700;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .view-switch-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 0, 0, 0.06);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #1c1c1e;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+    }
+
+    .view-switch-btn:hover {
+      background: #ffffff;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+
+    @media (max-width: 899px) {
+      .view-switch-btn {
+        display: none !important;
+      }
+    }
+
+    /* --- MAIN LAYOUT (STAGE + BUY BOX) --- */
+    #main-content {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* 3D Stage Column */
+    #stage-column {
+      position: relative;
+      flex: 1;
+      width: 100%;
+      height: 100%;
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      overflow: hidden;
+    }
+
+    #canvas3d {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;
+      height: 100% !important;
+      display: block;
+      outline: none;
+      touch-action: none;
+      cursor: grab;
+      transition: opacity 0.2s ease;
+    }
+
+    #canvas3d.loading {
+      opacity: 0.4;
+    }
+
+    #canvas3d:active {
+      cursor: grabbing;
+    }
+
+    /* Angle Selector Pills */
+    .angle-selector-wrap {
+      position: absolute;
+      bottom: 28px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      z-index: 40;
+      pointer-events: auto;
+    }
+
+    .angle-pill-btn {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(0, 0, 0, 0.05);
+      padding: 8px 18px;
+      border-radius: 9999px;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      color: #636366;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .angle-pill-btn:hover {
+      color: #000000;
+      background: #ffffff;
+      transform: translateY(-1px);
+    }
+
+    .angle-pill-btn.active {
+      background: #ffffff;
+      color: #000000;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Web Desktop Buy Column */
+    #buy-column {
+      width: 440px;
+      flex-shrink: 0;
+      padding: 100px 48px 40px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      z-index: 30;
+      overflow-y: auto;
+    }
+
+    .product-title-web {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #000000;
+      margin-bottom: 12px;
+    }
+
+    .product-price-web {
+      font-size: 26px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+    }
+
+    .product-sub-web {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 28px;
+      max-width: 340px;
+    }
+
+    /* Section Label */
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: #000000;
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Color Swatches (Desktop) */
+    .color-section-web {
+      margin-bottom: 24px;
+    }
+
+    .colors-row {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .swatch-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      border: 1.5px solid rgba(0, 0, 0, 0.12);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s;
+      flex-shrink: 0;
+    }
+
+    .swatch-circle:hover {
+      transform: scale(1.12);
+    }
+
+    .swatch-circle.active {
+      transform: scale(1.18);
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 3.5px #000000;
+    }
+
+    /* Size Selector */
+    .size-section-web {
+      margin-bottom: 32px;
+    }
+
+    .size-pills-row-web {
+      display: flex;
+      gap: 10px;
+    }
+
+    .size-pill-web {
+      flex: 1;
+      height: 42px;
+      border-radius: 9999px;
+      background: var(--pill-inactive-bg);
+      border: 1.5px solid transparent;
+      color: #636366;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .size-pill-web:hover {
+      color: #000000;
+      background: #dedee3;
+    }
+
+    .size-pill-web.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: var(--border-dark);
+      font-weight: 700;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    }
+
+    /* CTA Pill Buttons */
+    .cta-button-main {
+      width: 100%;
+      height: 50px;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 9999px;
+      font-family: var(--font-main);
+      font-size: 14.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 0 20px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cta-button-main:hover {
+      background: #1a1a1c;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+    }
+
+    .cta-btn-text {
+      letter-spacing: -0.01em;
+      white-space: nowrap;
+      text-align: center;
+    }
+
+    .cta-badges-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+
+    .badge-apple-pay {
+      background: #ffffff;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .badge-apple-pay svg {
+      height: 13px;
+      width: auto;
+    }
+
+    .badge-pix {
+      background: #ffffff;
+      height: 24px;
+      padding: 0 8px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+    }
+
+    .badge-pix svg {
+      height: 12px;
+      width: auto;
+    }
+
+    /* --- MOBILE BOTTOM CARD (ELEVATED SHEET) --- */
+    #mobile-bottom-card {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      background: #ffffff;
+      border-radius: 28px;
+      padding: 12px 16px 14px 16px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      z-index: 60;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
+    }
+
+    .card-handle-bar {
+      width: 36px;
+      height: 4px;
+      background: #e5e5ea;
+      border-radius: 9999px;
+      margin: 0 auto 8px auto;
+    }
+
+    .mobile-info-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .mobile-left-info {
+      flex: 1;
+      padding-right: 10px;
+    }
+
+    .mobile-title {
+      font-size: 19px;
+      font-weight: 700;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #000000;
+    }
+
+    .mobile-sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    .mobile-right-info {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .mobile-price {
+      font-size: 22px;
+      font-weight: 700;
+      color: #000000;
+      letter-spacing: -0.01em;
+    }
+
+    .mobile-color-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      margin-top: 3px;
+      letter-spacing: -0.01em;
+    }
+
+    /* Controls row: Color Swatches + Size Pills */
+    .mobile-controls-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .mobile-swatches-group {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      overflow-x: auto;
+      max-width: 190px;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .mobile-swatches-group::-webkit-scrollbar {
+      display: none;
+    }
+
+    .mobile-size-capsule {
+      background: var(--pill-inactive-bg);
+      border-radius: 9999px;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .size-pill-mob {
+      background: none;
+      border: 1.5px solid transparent;
+      color: #636366;
+      font-family: var(--font-main);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .size-pill-mob.active {
+      background: #ffffff;
+      color: #000000;
+      border-color: var(--border-dark);
+      font-weight: 700;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Mobile layout rules */
+    @media (max-width: 899px) {
+      #main-content {
+        min-width: 0;
+        min-height: 0;
+        width: 100%;
+      }
+
+      #stage-column {
+        min-width: 0;
+        min-height: 0;
+        width: 100%;
+        padding-bottom: 0;
+      }
+
+      .angle-selector-wrap {
+        left: 50% !important;
+        bottom: 240px;
+        transform: translateX(-50%) !important;
+        flex-direction: row !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        background: rgba(255, 255, 255, 0.94) !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        padding: 5px 8px !important;
+        border-radius: 9999px !important;
+        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+        z-index: 55 !important;
+      }
+
+      .angle-pill-btn {
+        padding: 6px 14px;
+        font-size: 11.5px;
+      }
+
+      .category-nav {
+        top: 66px;
+      }
+
+      .top-nav {
+        height: 60px;
+        padding: 0 18px;
+      }
+
+      .nav-right-actions .icon-btn.desktop-only {
+        display: none;
+      }
+
+      #buy-column {
+        display: none !important;
+      }
+    }
+
+    /* Desktop layout rules */
+    @media (min-width: 900px) {
+      #mobile-bottom-card {
+        display: none;
+      }
+
+      #buy-column {
+        display: flex;
+      }
+
+      .category-nav {
+        position: static;
+        transform: none;
+      }
+
+      .top-nav {
+        max-width: 1360px;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+      }
+
+      #main-content {
+        max-width: 1360px;
+        margin: 0 auto;
+      }
+    }
+
+    /* Optional Phone Frame Mode for Desktop Testing */
+    body.preview-iphone-frame #page-wrapper {
+      max-width: 412px;
+      max-height: 860px;
+      margin: auto;
+      border-radius: 44px;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25), 0 0 0 10px #1c1c1e;
+    }
+
+    body.preview-iphone-frame #main-content {
+      min-width: 0;
+      min-height: 0;
+      width: 100%;
+    }
+
+    body.preview-iphone-frame #mobile-bottom-card {
+      display: flex !important;
+    }
+
+    body.preview-iphone-frame #buy-column {
+      display: none !important;
+    }
+
+    body.preview-iphone-frame #stage-column {
+      min-width: 0;
+      min-height: 0;
+      width: 100%;
+      padding-bottom: 0;
+    }
+
+    body.preview-iphone-frame .category-nav {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      top: 66px;
+    }
+
+    body.preview-iphone-frame .angle-selector-wrap {
+      left: 50% !important;
+      bottom: 240px;
+      transform: translateX(-50%) !important;
+      flex-direction: row !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 8px !important;
+      background: rgba(255, 255, 255, 0.94) !important;
+      backdrop-filter: blur(16px) !important;
+      -webkit-backdrop-filter: blur(16px) !important;
+      padding: 5px 8px !important;
+      border-radius: 9999px !important;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.05) !important;
+      z-index: 55 !important;
+    }
+
+    body.preview-iphone-frame .angle-pill-btn {
+      padding: 6px 14px;
+      font-size: 11.5px;
+    }
+
+    body.preview-iphone-frame .nav-right-actions .icon-btn.desktop-only {
+      display: none;
+    }
+
+    /* Modal Checkout */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.55);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 440px;
+      width: 100%;
+      padding: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      background: #f2f2f7;
+      border: none;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #636366;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #000000;
+      margin-bottom: 4px;
+    }
+
+    .pix-box {
+      background: #f7faf9;
+      border: 1px solid #d3eee9;
+      border-radius: 16px;
+      padding: 18px;
+      margin-top: 14px;
+      text-align: center;
+    }
+
+    .pix-amount {
+      font-size: 26px;
+      font-weight: 800;
+      color: #000000;
+      margin: 4px 0;
+    }
+
+    .qr-container {
+      width: 160px;
+      height: 160px;
+      background: #ffffff;
+      border-radius: 12px;
+      margin: 12px auto;
+      padding: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .copy-pix-btn {
+      width: 100%;
+      background: var(--pix-teal);
+      color: #ffffff;
+      border: none;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      padding: 12px;
+      border-radius: 9999px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: opacity 0.2s;
+    }
+
+    .copy-pix-btn:hover {
+      opacity: 0.9;
+    }
+
+    .payload-dimona-btn {
+      margin-top: 10px;
+      background: none;
+      border: 1px solid #e5e5ea;
+      color: #636366;
+      font-size: 12px;
+      padding: 10px;
+      border-radius: 9999px;
+      cursor: pointer;
+      width: 100%;
+      transition: background 0.2s;
+    }
+
+    .payload-dimona-btn:hover {
+      background: #f2f2f7;
+    }
+
+    .toast-msg {
+      position: fixed;
+      top: 86px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-30px);
+      background: #1c1c1e;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .toast-msg.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Secondary Add to Bag Button */
+    .btn-secondary-bag {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: #f2f2f7;
+      color: #000000;
+      border: 1.5px solid #e5e5ea;
+      border-radius: 9999px;
+      font-family: var(--font-main);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+    }
+
+    .btn-secondary-bag:hover {
+      background: #e5e5ea;
+      border-color: #d1d1d6;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary-bag svg {
+      width: 18px;
+      height: 18px;
+      stroke-width: 2.2;
+    }
+
+    /* Desktop CTA Stack */
+    .desktop-cta-stack {
+      width: 100%;
+      margin-top: 12px;
+    }
+
+    /* Mobile CTA Single Row */
+    .mobile-cta-single-row {
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .mobile-cta-single-row .cta-button-main {
+      width: 100%;
+      height: 48px;
+      font-size: 14px;
+      padding: 0 16px;
+    }
+
+    /* Badge Bounce Animation */
+    @keyframes cartBump {
+      0% { transform: scale(1); }
+      40% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+
+    .cart-bump {
+      animation: cartBump 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    /* --- SLIDE-IN DRAWER CART (Abre da direita para esquerda) --- */
+    .cart-drawer-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 998;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-drawer-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      left: auto;
+      width: 420px;
+      max-width: 92vw;
+      height: 100%;
+      background: #ffffff;
+      z-index: 999;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -20px 0 60px rgba(0, 0, 0, 0.22);
+      transform: translateX(100%);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-drawer-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 22px 16px 22px;
+      border-bottom: 1px solid #f2f2f7;
+    }
+
+    .cart-header-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-header-icon {
+      width: 22px;
+      height: 22px;
+      stroke: #000;
+    }
+
+    .cart-drawer-title {
+      font-size: 19px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: #000;
+    }
+
+    .cart-header-count {
+      font-size: 12px;
+      font-weight: 600;
+      background: #f2f2f7;
+      color: #636366;
+      padding: 3px 9px;
+      border-radius: 9999px;
+    }
+
+    .cart-drawer-close {
+      width: 32px;
+      height: 32px;
+      background: #f2f2f7;
+      border: none;
+      border-radius: 50%;
+      font-size: 20px;
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #636366;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .cart-drawer-close:hover {
+      background: #e5e5ea;
+      color: #000;
+    }
+
+    .cart-shipping-banner {
+      background: #f6fcfb;
+      border-bottom: 1px solid #e1f5f2;
+      padding: 12px 22px;
+    }
+
+    .cart-shipping-text {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12.5px;
+      color: #128073;
+    }
+
+    .shipping-bar-track {
+      width: 100%;
+      height: 5px;
+      background: #d4f2ee;
+      border-radius: 9999px;
+      margin-top: 8px;
+      overflow: hidden;
+    }
+
+    .shipping-bar-fill {
+      width: 100%;
+      height: 100%;
+      background: var(--pix-teal);
+      border-radius: 9999px;
+    }
+
+    .cart-items-container {
+      flex: 1;
+      overflow-y: auto;
+      padding: 18px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-empty-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 20px;
+      height: 100%;
+    }
+
+    .cart-empty-icon {
+      font-size: 52px;
+      margin-bottom: 14px;
+    }
+
+    .cart-empty-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #000;
+      margin-bottom: 6px;
+    }
+
+    .cart-empty-sub {
+      font-size: 13px;
+      color: #8e8e93;
+      max-width: 240px;
+      line-height: 1.4;
+      margin-bottom: 20px;
+    }
+
+    .cart-explore-btn {
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .cart-explore-btn:hover {
+      background: #2c2c2e;
+    }
+
+    .cart-item-card {
+      display: flex;
+      gap: 14px;
+      padding: 12px;
+      background: #f8f8fa;
+      border-radius: 18px;
+      align-items: center;
+      position: relative;
+    }
+
+    .cart-item-thumb {
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,0.06);
+    }
+
+    .cart-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .cart-item-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #000;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .cart-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 11.5px;
+      color: #636366;
+    }
+
+    .cart-item-color-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.15);
+      display: inline-block;
+    }
+
+    .cart-item-price {
+      font-size: 14px;
+      font-weight: 700;
+      color: #000;
+      margin-top: 3px;
+    }
+
+    .cart-item-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 6px;
+    }
+
+    .cart-qty-pill {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      border-radius: 9999px;
+      padding: 2px 6px;
+      gap: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .cart-qty-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 700;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #000;
+      border-radius: 50%;
+    }
+
+    .cart-qty-btn:hover {
+      background: #f0f0f2;
+    }
+
+    .cart-item-remove {
+      background: none;
+      border: none;
+      color: #8e8e93;
+      cursor: pointer;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+    }
+
+    .cart-item-remove:hover {
+      color: #ff3b30;
+    }
+
+    .cart-drawer-footer {
+      border-top: 1px solid #f2f2f7;
+      padding: 18px 22px 22px 22px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .cart-coupon-box {
+      display: flex;
+      gap: 8px;
+    }
+
+    .cart-coupon-box input {
+      flex: 1;
+      height: 38px;
+      background: #f2f2f7;
+      border: 1px solid #e5e5ea;
+      border-radius: 9999px;
+      padding: 0 14px;
+      font-family: var(--font-main);
+      font-size: 12.5px;
+      text-transform: uppercase;
+      outline: none;
+    }
+
+    .cart-coupon-box input:focus {
+      border-color: #000;
+      background: #fff;
+    }
+
+    .cart-coupon-box button {
+      height: 38px;
+      padding: 0 16px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .coupon-applied-msg {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #128073;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: -6px;
+    }
+
+    .cart-summary-lines {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      color: #636366;
+    }
+
+    .summary-line.total-line {
+      font-size: 16px;
+      font-weight: 700;
+      color: #000;
+      margin-top: 4px;
+      padding-top: 6px;
+      border-top: 1px dashed #e5e5ea;
+    }
+
+    .summary-line.discount-line {
+      color: #128073;
+      font-weight: 600;
+    }
+
+    .free-badge {
+      font-size: 11px;
+      font-weight: 700;
+      color: #128073;
+      background: #e6f7f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .cart-installments-text {
+      font-size: 11px;
+      color: #8e8e93;
+      text-align: right;
+      margin-top: -2px;
+    }
+
+    .cart-checkout-btn {
+      width: 100%;
+      height: 52px;
+      background: #000000;
+      color: #ffffff;
+      border: none;
+      border-radius: 9999px;
+      font-family: var(--font-main);
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px 0 22px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-checkout-btn:hover {
+      background: #1c1c1e;
+      transform: translateY(-1px);
+    }
+
+  </style>
+
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <div id="page-wrapper">
+
+    <!-- Top Navigation Bar -->
+    <header class="top-nav">
+      <!-- Left: Dripping Brand Wordmark -->
+      <a href="#" class="brand-logo-wrap">
+        <img src="iceout_logo_dripping.png" alt="ICE OUT CLUB" class="brand-logo-img">
+      </a>
+
+      <!-- Center: Category Pills (Oversized, Hoodie, Tech) -->
+      <div class="category-nav">
+        <div class="category-pills-bar" id="category-pills-bar">
+          <button class="cat-pill active" data-cat="oversized">Oversized</button>
+          <button class="cat-pill" data-cat="hoodie">Hoodie</button>
+          <button class="cat-pill" data-cat="tech">Tech</button>
+        </div>
+        <div class="cat-indicator-dot" id="cat-dot"></div>
+      </div>
+
+      <!-- Right: Action Icons -->
+      <div class="nav-right-actions">
+        <!-- Switcher on PC to toggle Mobile Frame -->
+        <button class="view-switch-btn" id="btn-toggle-frame" title="Alternar visualização">
+          <span id="frame-icon">📱</span>
+          <span id="frame-text">Mobile View</span>
+        </button>
+
+
+
+        <!-- Shopping Bag Icon (with Badge 1) -->
+        <button class="icon-btn" id="btn-open-bag" title="Sacola de Compras">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          <span class="bag-badge" id="bag-count">1</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main id="main-content">
+      
+      <!-- 3D Studio Stage -->
+      <section id="stage-column">
+        <canvas id="canvas3d"></canvas>
+
+        <!-- Quick Angle Switcher -->
+        <div class="angle-selector-wrap">
+          <button class="angle-pill-btn" id="btn-angle-front">Frente</button>
+          <button class="angle-pill-btn" id="btn-angle-back">Costas</button>
+          <button class="angle-pill-btn active" id="btn-angle-360">
+            <span>360°</span>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-1.19"/>
+            </svg>
+          </button>
+        </div>
+      </section>
+
+      <!-- Web Desktop Buy Column -->
+      <aside id="buy-column">
+        <h1 class="product-title-web" id="desktop-product-title">Oversized<br>Streetwear T-Shirt</h1>
+        <div class="product-price-web" id="desktop-product-price">R$ 159,00</div>
+        <p class="product-sub-web" id="desktop-product-sub">100% Algodão Penteado 260g — Gramatura Pesada & Caimento Streetwear</p>
+
+        <!-- Color Swatches (Desktop) -->
+        <div class="color-section-web">
+          <div class="section-label">
+            <span>Cor</span>
+            <span id="label-color-name" style="font-weight: 500; color: #8e8e93;">Preto Carvão</span>
+          </div>
+          <div class="colors-row" id="desktop-colors-row">
+            <!-- Dynamic swatches inserted here -->
+          </div>
+        </div>
+
+        <!-- Size Selector -->
+        <div class="size-section-web">
+          <div class="section-label">
+            <span>Tamanho</span>
+          </div>
+          <div class="size-pills-row-web">
+            <button class="size-pill-web" data-size="P">P</button>
+            <button class="size-pill-web" data-size="M">M</button>
+            <button class="size-pill-web active" data-size="G">G</button>
+            <button class="size-pill-web" data-size="GG">GG</button>
+          </div>
+        </div>
+
+        <!-- CTA Button Group (Desktop) -->
+        <div class="desktop-cta-stack">
+          <button class="cta-button-main" id="btn-cta-desktop">
+            <span class="cta-btn-text" id="cta-text-desktop">Adicionar ao carrinho | R$ 159,00</span>
+          </button>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Mobile Bottom Card (Elevated Sheet) -->
+    <div id="mobile-bottom-card">
+      <div class="card-handle-bar"></div>
+      
+      <div class="mobile-info-row">
+        <div class="mobile-left-info">
+          <div class="mobile-title" id="mobile-product-title">Oversized<br>Streetwear T-Shirt</div>
+          <div class="mobile-sub" id="mobile-product-sub">100% Algodão Penteado 260g — Gramatura Pesada & Caimento Streetwear</div>
+        </div>
+
+        <div class="mobile-right-info">
+          <div class="mobile-price" id="mobile-product-price">R$ 159,00</div>
+          <div class="mobile-color-label" id="mobile-color-label">Preto Carvão</div>
+        </div>
+      </div>
+
+      <!-- Controls row: Color Swatches + Size Pills -->
+      <div class="mobile-controls-row">
+        <!-- Color swatches on mobile -->
+        <div class="mobile-swatches-group" id="mobile-colors-row">
+          <!-- Dynamic swatches inserted here -->
+        </div>
+
+        <!-- Size Capsule on Mobile -->
+        <div class="mobile-size-capsule">
+          <button class="size-pill-mob" data-size="P">P</button>
+          <button class="size-pill-mob" data-size="M">M</button>
+          <button class="size-pill-mob active" data-size="G">G</button>
+          <button class="size-pill-mob" data-size="GG">GG</button>
+        </div>
+      </div>
+
+      <!-- Mobile CTA Single Row -->
+      <div class="mobile-cta-single-row">
+        <button class="cta-button-main" id="btn-cta-mobile">
+          <span class="cta-btn-text" id="cta-text-mobile">Adicionar ao carrinho | R$ 159,00</span>
+        </button>
+      </div>
+    </div>
+
+  </div> <!-- End #page-wrapper -->
+
+
+  <!-- Slide-in Drawer Cart (Abre da esquerda para direita) -->
+  <div class="cart-drawer-overlay" id="cart-drawer-overlay"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-label="Sacola de Compras">
+    <div class="cart-drawer-header">
+      <div class="cart-header-title-wrap">
+        <svg class="cart-header-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 0 1-8 0"/>
+        </svg>
+        <h2 class="cart-drawer-title">Sua Sacola</h2>
+        <span class="cart-header-count" id="cart-header-count">1 item</span>
+      </div>
+      <button class="cart-drawer-close" id="btn-close-cart" aria-label="Fechar sacola">&times;</button>
+    </div>
+
+    <!-- Free Shipping Alert Banner -->
+    <div class="cart-shipping-banner">
+      <div class="cart-shipping-text">
+        <span class="shipping-icon">⚡</span>
+        <span><b>Frete Grátis</b> desbloqueado para todo o Brasil!</span>
+      </div>
+      <div class="shipping-bar-track">
+        <div class="shipping-bar-fill"></div>
+      </div>
+    </div>
+
+    <!-- Items Scroll Container -->
+    <div class="cart-items-container" id="cart-items-container">
+      <!-- Dynamic Items -->
+    </div>
+
+    <!-- Cart Footer with Coupon, Subtotals, and Checkout Button -->
+    <div class="cart-drawer-footer" id="cart-drawer-footer">
+      <div class="cart-coupon-box">
+        <input type="text" id="cart-coupon-input" placeholder="Cupom (ex: ICEOUT10)">
+        <button id="btn-apply-coupon">Aplicar</button>
+      </div>
+      <div class="coupon-applied-msg" id="coupon-msg" style="display: none;"></div>
+
+      <div class="cart-summary-lines">
+        <div class="summary-line">
+          <span>Subtotal</span>
+          <span id="cart-subtotal-val">R$ 159,00</span>
+        </div>
+        <div class="summary-line discount-line" id="cart-discount-row" style="display: none;">
+          <span>Desconto</span>
+          <span id="cart-discount-val">- R$ 0,00</span>
+        </div>
+        <div class="summary-line">
+          <span>Frete</span>
+          <span class="free-badge">GRÁTIS</span>
+        </div>
+        <div class="summary-line total-line">
+          <span>Total</span>
+          <span id="cart-total-val">R$ 159,00</span>
+        </div>
+        <div class="cart-installments-text" id="cart-installments-val">
+          em até 3x sem juros ou 5% OFF no PIX
+        </div>
+      </div>
+
+      <button class="cart-checkout-btn" id="btn-cart-checkout">
+        <span>Finalizar Compra — R$ 159,00</span>
+        <div class="cta-badges-group">
+          <span class="badge-apple-pay">
+            <svg viewBox="0 0 45 20" fill="none">
+              <path d="M12.98 9.53c-.02-1.34 1.09-1.99 1.14-2.02-.63-.91-1.6-1.04-1.95-1.05-.83-.09-1.63.49-2.05.49-.43 0-1.09-.48-1.78-.47-.91.01-1.76.54-2.23 1.36-.96 1.66-.24 4.12.68 5.46.46.66 1.04 1.63 1.39.6-.02.83-.39 1.55-.39.73 0 .93.39 1.56.38.64-.01 1.11-.67 1.56-1.33.52-.76.73-1.5.75-1.54-.02-.01-1.44-.55-1.45-2.18z" fill="#000000"/>
+              <path d="M11.75 5.58c.37-.46.62-1.09.55-1.73-.54.02-1.18.36-1.56.81-.34.39-.63 1.03-.55 1.66.6.05 1.2-.28 1.56-.74z" fill="#000000"/>
+              <text x="18" y="14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="600" fill="#000000">Pay</text>
+            </svg>
+          </span>
+          <span class="badge-pix">
+            <svg viewBox="0 0 46 20" fill="none">
+              <path d="M5.8 4.2a1.8 1.8 0 0 1 2.5 0l2.5 2.5a1.8 1.8 0 0 1 0 2.5L8.3 11.7a1.8 1.8 0 0 1-2.5 0L3.3 9.2a1.8 1.8 0 0 1 0-2.5L5.8 4.2z" fill="#32bcad"/>
+              <path d="M10.2 8.6a1.8 1.8 0 0 1 2.5 0l2.5 2.5a1.8 1.8 0 0 1 0 2.5l-2.5 2.5a1.8 1.8 0 0 1-2.5 0l-2.5-2.5a1.8 1.8 0 0 1 0-2.5l2.5-2.5z" fill="#32bcad" opacity="0.8"/>
+              <text x="18" y="14" font-family="-apple-system, BlinkMacSystemFont, sans-serif" font-size="11" font-weight="700" fill="#32bcad">pix</text>
+            </svg>
+          </span>
+        </div>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Checkout & PIX Modal -->
+  <div class="modal-overlay" id="checkout-modal">
+    <div class="modal-box">
+      <button class="modal-close-btn" id="btn-close-checkout">&times;</button>
+      <h3 class="modal-title">Finalizar Pedido</h3>
+      <p style="font-size: 13px; color: #8e8e93;"><span id="checkout-product-name">Oversized Streetwear T-Shirt</span> — Tam <b id="checkout-selected-size">G</b></p>
+
+      <div class="pix-box">
+        <div style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--pix-teal); font-weight: 700;">Pagamento Instantâneo Pix</div>
+        <div class="pix-amount" id="checkout-pix-amount">R$ 159,00</div>
+        
+        <div class="qr-container">
+          <div style="text-align: center;">
+            <div style="font-size: 64px;">📱</div>
+            <div style="font-size: 11px; color: #8e8e93; font-weight: 500;">Escaneie o QR Code</div>
+          </div>
+        </div>
+
+        <button class="copy-pix-btn" id="btn-copy-pix">Copiar Código Pix</button>
+      </div>
+
+      <button class="payload-dimona-btn" id="btn-view-dimona-order">
+        📦 Ver Especificações Técnicas de Confecção
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div class="toast-msg" id="toast-msg">Notificação</div>
+
+  <!-- THREE.JS MULTI-PRODUCT APPLICATION SCRIPT -->
+  <script type="module">
+    import * as THREE from 'three';
+    import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+    import { DRACOLoader } from 'three/addons/loaders/DRACOLoader.js';
+    import { DecalGeometry } from 'three/addons/geometries/DecalGeometry.js';
+    import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
+
+    // Official Product Catalog Configuration
+    const PRODUCTS = {
+      oversized: {
+        key: 'oversized',
+        titleWeb: 'Oversized<br>Streetwear T-Shirt',
+        titleMob: 'Oversized<br>Streetwear T-Shirt',
+        titleFlat: 'Oversized Streetwear T-Shirt',
+        subtitle: '100% Algodão Penteado 260g — Gramatura Pesada & Caimento Streetwear',
+        price: 'R$ 159,00',
+        sku: '010603110109',
+        modelUrl: 'dimona_real_oversized.gltf',
+        rotateY: -Math.PI / 2,
+        decalFrontY: 0.11,
+        decalFrontZ: 0.14,
+        decalFrontScale: 0.10,
+        decalBackY: 0.06,
+        decalBackZ: -0.14,
+        decalBackScale: 0.28,
+        isFront: (c, m) => m.includes('Frente') || c.name === 'camiseta_1' || c.name.endsWith('_0'),
+        isBack: (c, m) => m.includes('Costas') || c.name === 'camiseta_2' || c.name.endsWith('_1'),
+        roughness: 0.82,
+        colors: [
+          { hex: '#1a1a1c', name: 'Preto Carvão' },
+          { hex: '#f3eedf', name: 'Off-White Bege' },
+          { hex: '#82868b', name: 'Cinza Mescla' },
+          { hex: '#152238', name: 'Azul Noturno' },
+          { hex: '#6b1d1d', name: 'Bordô Deep' }
+        ]
+      },
+      hoodie: {
+        key: 'hoodie',
+        titleWeb: 'Moletom<br>Blusão Prime',
+        titleMob: 'Moletom<br>Blusão Prime',
+        titleFlat: 'Moletom Blusão Prime',
+        subtitle: 'Moletom Peluciado Premium 3 Cabos — Conforto Térmico & Toque Macio',
+        price: 'R$ 239,00',
+        sku: '020401010108',
+        modelUrl: 'dimona_hoodie.glb',
+        rotateY: Math.PI,
+        decalFrontY: 0.08,
+        decalFrontZ: 0.16,
+        decalFrontScale: 0.11,
+        decalBackY: 0.05,
+        decalBackZ: -0.16,
+        decalBackScale: 0.29,
+        isFront: (c, m) => m === 'Frente' || c.name.includes('primitive0'),
+        isBack: (c, m) => m === 'Costas' || c.name.includes('primitive1'),
+        roughness: 0.84,
+        colors: [
+          { hex: '#111112', name: 'Preto' },
+          { hex: '#1c3547', name: 'Azul Petróleo' },
+          { hex: '#ede8db', name: 'Off-White' },
+          { hex: '#87898d', name: 'Cinza Mescla' },
+          { hex: '#f5f5f5', name: 'Branco' }
+        ]
+      },
+      tech: {
+        key: 'tech',
+        titleWeb: 'Tech<br>Streetwear T-Shirt',
+        titleMob: 'Tech<br>Streetwear T-Shirt',
+        titleFlat: 'Tech Streetwear T-Shirt',
+        subtitle: 'Poliamida Nobre & Elastano — Tecnologia Anti-odor & Secagem Ultra-Rápida',
+        price: 'R$ 149,00',
+        sku: '010901010109',
+        modelUrl: 'dimona_tech.glb',
+        rotateY: Math.PI,
+        decalFrontY: 0.10,
+        decalFrontZ: 0.14,
+        decalFrontScale: 0.095,
+        decalBackY: 0.05,
+        decalBackZ: -0.14,
+        decalBackScale: 0.27,
+        isFront: (c, m) => c.name.includes('primitive2') || m === 'blinn1SG',
+        isBack: (c, m) => c.name.includes('primitive0') || m === 'blinn2SG',
+        roughness: 0.83,
+        colors: [
+          { hex: '#121214', name: 'Preto' },
+          { hex: '#ede9de', name: 'Off-White' },
+          { hex: '#131c2e', name: 'Azul Marinho' },
+          { hex: '#233429', name: 'Verde Musgo' },
+          { hex: '#3b2d28', name: 'Marrom Café' },
+          { hex: '#32192e', name: 'Roxo Deep' },
+          { hex: '#f5f5f5', name: 'Branco' }
+        ]
+      }
+    };
+
+    // Global Active State
+    const state = {
+      category: 'oversized',
+      color: '#1a1a1c',
+      colorName: 'Preto Carvão',
+      size: 'G',
+      frontUrl: 'front_adao.png',
+      backUrl: 'back_iceout.png',
+      frontTexture: null,
+      backTexture: null,
+      shirtMesh: null,
+      frontMesh: null,
+      backMesh: null,
+      frontDecalMesh: null,
+      backDecalMesh: null,
+      modelSizeX: 0.70
+    };
+
+    const container = document.getElementById('stage-column');
+    const canvas = document.getElementById('canvas3d');
+    const toast = document.getElementById('toast-msg');
+
+    function showToast(text) {
+      toast.textContent = text;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    // --- THREE.JS SCENE SETUP ---
+    const scene = new THREE.Scene();
+
+    const camera = new THREE.PerspectiveCamera(38, container.clientWidth / container.clientHeight, 0.1, 100);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, preserveDrawingBuffer: true });
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+    renderer.toneMapping = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.12;
+
+    const controls = new OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+    controls.target.set(0, 0, 0);
+    controls.minDistance = 0.7;
+    controls.maxDistance = 3.5;
+    controls.maxPolarAngle = Math.PI / 2 + 0.12;
+    controls.autoRotate = true;
+    controls.autoRotateSpeed = 2.2;
+
+    // --- STUDIO LIGHTING RIG (PROFESSIONAL FASHION 3-POINT) ---
+    const ambientLight = new THREE.AmbientLight(0xffffff, 1.15);
+    scene.add(ambientLight);
+
+    // Warm key light
+    const keyLight = new THREE.DirectionalLight(0xfffbf2, 1.45);
+    keyLight.position.set(2.5, 3.5, 3.2);
+    keyLight.castShadow = true;
+    scene.add(keyLight);
+
+    // Soft fill light
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.9);
+    fillLight.position.set(-3, 1.5, 2.5);
+    scene.add(fillLight);
+
+    // Cool rim/edge light to accentuate streetwear silhouettes and fabric folds
+    const rimLight = new THREE.DirectionalLight(0xdbe7ff, 1.65);
+    rimLight.position.set(0, 2.8, -3.2);
+    scene.add(rimLight);
+
+    // Soft overhead light
+    const topLight = new THREE.DirectionalLight(0xffffff, 0.5);
+    topLight.position.set(0, 4, 0);
+    scene.add(topLight);
+
+    // Soft Ambient Contact Floor Shadow
+    const shadowGeo = new THREE.PlaneGeometry(1.4, 1.4);
+    const canvasShadow = document.createElement('canvas');
+    canvasShadow.width = 128;
+    canvasShadow.height = 128;
+    const ctx = canvasShadow.getContext('2d');
+    const grad = ctx.createRadialGradient(64, 64, 14, 64, 64, 64);
+    grad.addColorStop(0, 'rgba(0, 0, 0, 0.20)');
+    grad.addColorStop(0.5, 'rgba(0, 0, 0, 0.06)');
+    grad.addColorStop(1, 'rgba(0, 0, 0, 0)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 128, 128);
+    const shadowTexture = new THREE.CanvasTexture(canvasShadow);
+    const shadowMat = new THREE.MeshBasicMaterial({ map: shadowTexture, transparent: true });
+    const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+    shadowMesh.rotation.x = -Math.PI / 2;
+    shadowMesh.position.y = -0.38;
+    scene.add(shadowMesh);
+
+    // --- NORMAL MAP TEXTURE ---
+    const textureLoader = new THREE.TextureLoader();
+    const dimonaNormalMap = textureLoader.load('dimona_smooth_cotton_normal.png');
+    dimonaNormalMap.wrapS = THREE.RepeatWrapping;
+    dimonaNormalMap.wrapT = THREE.RepeatWrapping;
+    dimonaNormalMap.repeat.set(16, 16);
+
+    // Load Decal Textures (Adão and Ice Out Club)
+    textureLoader.load(state.frontUrl, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      state.frontTexture = tex;
+      updateFrontDecal();
+    });
+
+    textureLoader.load(state.backUrl, (tex) => {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      state.backTexture = tex;
+      updateBackDecal();
+    });
+
+    // --- DECALS: FRENTE & COSTAS ---
+    function updateFrontDecal() {
+      const prod = PRODUCTS[state.category];
+      const targetMesh = state.frontMesh || state.shirtMesh;
+      if (!targetMesh || !state.frontTexture || !prod) return;
+
+      if (state.frontDecalMesh) {
+        scene.remove(state.frontDecalMesh);
+        if (state.frontDecalMesh.geometry) state.frontDecalMesh.geometry.dispose();
+        state.frontDecalMesh = null;
+      }
+
+      const position = new THREE.Vector3(0, prod.decalFrontY, prod.decalFrontZ);
+      const orientation = new THREE.Euler(0, 0, 0);
+
+      let aspect = 2.76;
+      if (state.frontTexture.image) {
+        aspect = state.frontTexture.image.width / state.frontTexture.image.height;
+      }
+
+      const scale = prod.decalFrontScale || 0.10;
+      const sizeX = scale * aspect;
+      const sizeY = scale;
+      const sizeZ = 0.35;
+      const size = new THREE.Vector3(sizeX, sizeY, sizeZ);
+
+      try {
+        const decalGeometry = new DecalGeometry(targetMesh, position, orientation, size);
+        const decalMaterial = new THREE.MeshBasicMaterial({
+          map: state.frontTexture,
+          transparent: true,
+          depthTest: true,
+          depthWrite: false,
+          polygonOffset: true,
+          polygonOffsetFactor: -4,
+          polygonOffsetUnits: -4,
+          side: THREE.DoubleSide
+        });
+
+        state.frontDecalMesh = new THREE.Mesh(decalGeometry, decalMaterial);
+        state.frontDecalMesh.userData.isDecal = true;
+        state.frontDecalMesh.renderOrder = 10;
+        scene.add(state.frontDecalMesh);
+      } catch (err) {
+        console.warn('Front decal warning:', err);
+      }
+    }
+
+    function updateBackDecal() {
+      const prod = PRODUCTS[state.category];
+      const targetMesh = state.backMesh || state.shirtMesh;
+      if (!targetMesh || !state.backTexture || !prod) return;
+
+      if (state.backDecalMesh) {
+        scene.remove(state.backDecalMesh);
+        if (state.backDecalMesh.geometry) state.backDecalMesh.geometry.dispose();
+        state.backDecalMesh = null;
+      }
+
+      const position = new THREE.Vector3(0, prod.decalBackY, prod.decalBackZ);
+      const orientation = new THREE.Euler(0, Math.PI, 0);
+
+      let aspect = 1.0;
+      if (state.backTexture.image) {
+        aspect = state.backTexture.image.width / state.backTexture.image.height;
+      }
+
+      const scale = prod.decalBackScale || 0.28;
+      const sizeX = scale * aspect;
+      const sizeY = scale;
+      const sizeZ = 0.35;
+      const size = new THREE.Vector3(sizeX, sizeY, sizeZ);
+
+      try {
+        const decalGeometry = new DecalGeometry(targetMesh, position, orientation, size);
+        const decalMaterial = new THREE.MeshBasicMaterial({
+          map: state.backTexture,
+          transparent: true,
+          depthTest: true,
+          depthWrite: false,
+          polygonOffset: true,
+          polygonOffsetFactor: -4,
+          polygonOffsetUnits: -4,
+          side: THREE.DoubleSide
+        });
+
+        state.backDecalMesh = new THREE.Mesh(decalGeometry, decalMaterial);
+        state.backDecalMesh.userData.isDecal = true;
+        state.backDecalMesh.renderOrder = 10;
+        scene.add(state.backDecalMesh);
+      } catch (err) {
+        console.warn('Back decal warning:', err);
+      }
+    }
+
+    // --- COLOR APPLICATION ---
+    function applyShirtColor(hex, name) {
+      state.color = hex;
+      if (name) state.colorName = name;
+      const col = new THREE.Color(hex);
+
+      const labelDesktop = document.getElementById('label-color-name');
+      const labelMobile = document.getElementById('mobile-color-label');
+      if (labelDesktop) labelDesktop.textContent = state.colorName;
+      if (labelMobile) labelMobile.textContent = state.colorName;
+
+      // Update swatch active classes across both desktop and mobile
+      document.querySelectorAll('.swatch-circle').forEach(swatch => {
+        if (swatch.getAttribute('data-color').toLowerCase() === hex.toLowerCase()) {
+          swatch.classList.add('active');
+        } else {
+          swatch.classList.remove('active');
+        }
+      });
+
+      if (!currentModelGroup) return;
+
+      const prod = PRODUCTS[state.category] || PRODUCTS.oversized;
+
+      currentModelGroup.traverse((child) => {
+        if (child.isMesh && !child.userData.isDecal && child.material) {
+          const mats = Array.isArray(child.material) ? child.material : [child.material];
+          mats.forEach(m => {
+            m.color.copy(col);
+            m.roughness = prod.roughness || 0.82;
+            m.metalness = 0.0;
+            if (dimonaNormalMap) {
+              m.normalMap = dimonaNormalMap;
+              m.normalScale = new THREE.Vector2(0.18, 0.18);
+            }
+            m.side = THREE.DoubleSide;
+            m.needsUpdate = true;
+          });
+        }
+      });
+    }
+
+    // --- DYNAMIC COLOR SWATCHES GENERATOR ---
+    function renderColorSwatches(prod) {
+      const desktopRow = document.getElementById('desktop-colors-row');
+      const mobileRow = document.getElementById('mobile-colors-row');
+      if (!desktopRow || !mobileRow) return;
+
+      desktopRow.innerHTML = '';
+      mobileRow.innerHTML = '';
+
+      prod.colors.forEach(col => {
+        const isActive = col.hex.toLowerCase() === state.color.toLowerCase();
+
+        // Desktop swatch
+        const dSwatch = document.createElement('div');
+        dSwatch.className = `swatch-circle ${isActive ? 'active' : ''}`;
+        dSwatch.style.backgroundColor = col.hex;
+        dSwatch.setAttribute('data-color', col.hex);
+        dSwatch.setAttribute('data-name', col.name);
+        dSwatch.setAttribute('title', col.name);
+        dSwatch.addEventListener('click', () => applyShirtColor(col.hex, col.name));
+        desktopRow.appendChild(dSwatch);
+
+        // Mobile swatch
+        const mSwatch = document.createElement('div');
+        mSwatch.className = `swatch-circle ${isActive ? 'active' : ''}`;
+        mSwatch.style.backgroundColor = col.hex;
+        mSwatch.setAttribute('data-color', col.hex);
+        mSwatch.setAttribute('data-name', col.name);
+        mSwatch.setAttribute('title', col.name);
+        mSwatch.addEventListener('click', () => applyShirtColor(col.hex, col.name));
+        mobileRow.appendChild(mSwatch);
+      });
+
+      const labelDesktop = document.getElementById('label-color-name');
+      const labelMobile = document.getElementById('mobile-color-label');
+      if (labelDesktop) labelDesktop.textContent = state.colorName;
+      if (labelMobile) labelMobile.textContent = state.colorName;
+    }
+
+    // --- UPDATE PRODUCT UI (TITLES, PRICES, CTAS, MODAL) ---
+    function updateProductUI(prod) {
+      // Titles & Subtitles
+      const deskTitle = document.getElementById('desktop-product-title');
+      const deskSub = document.getElementById('desktop-product-sub');
+      const deskPrice = document.getElementById('desktop-product-price');
+      const mobTitle = document.getElementById('mobile-product-title');
+      const mobSub = document.getElementById('mobile-product-sub');
+      const mobPrice = document.getElementById('mobile-product-price');
+
+      if (deskTitle) deskTitle.innerHTML = prod.titleWeb;
+      if (deskSub) deskSub.textContent = prod.subtitle;
+      if (deskPrice) deskPrice.textContent = prod.price;
+      if (mobTitle) mobTitle.innerHTML = prod.titleMob;
+      if (mobSub) mobSub.textContent = prod.subtitle;
+      if (mobPrice) mobPrice.textContent = prod.price;
+
+      // CTA Buttons
+      const ctaDesktop = document.getElementById('cta-text-desktop');
+      const ctaMobile = document.getElementById('cta-text-mobile');
+      if (ctaDesktop) ctaDesktop.textContent = `Adicionar ao carrinho | ${prod.price}`;
+      if (ctaMobile) ctaMobile.textContent = `Adicionar ao carrinho | ${prod.price}`;
+
+      // Checkout Modal details
+      const modalProdName = document.getElementById('checkout-product-name');
+      const modalPixAmount = document.getElementById('checkout-pix-amount');
+      const modalDimonaBtn = document.getElementById('btn-view-dimona-order');
+      if (modalProdName) modalProdName.textContent = prod.titleFlat;
+      if (modalPixAmount) modalPixAmount.textContent = prod.price;
+      if (modalDimonaBtn) modalDimonaBtn.innerHTML = `📦 Ver Especificações Técnicas (SKU: ${prod.sku})`;
+    }
+
+    // --- CAMERA FRAMING & OPTICAL CENTERING ---
+    let targetCameraDistance = 1.25;
+    let targetCenterY = 0.0;
+
+    function updateAngleSelectorPosition() {
+      const isMobile = window.innerWidth < 900 || document.body.classList.contains('preview-iphone-frame');
+      const card = document.getElementById('mobile-bottom-card');
+      const angleWrap = document.querySelector('.angle-selector-wrap');
+      if (!angleWrap) return;
+      if (isMobile && card && window.getComputedStyle(card).display !== 'none') {
+        const cardRect = card.getBoundingClientRect();
+        const distFromBottom = window.innerHeight - cardRect.top;
+        const targetBottom = Math.max(180, Math.round(distFromBottom + 16));
+        angleWrap.style.setProperty('bottom', `${targetBottom}px`, 'important');
+      } else {
+        angleWrap.style.removeProperty('bottom');
+      }
+    }
+
+    if (window.ResizeObserver) {
+      window.addEventListener('DOMContentLoaded', () => {
+        const cardEl = document.getElementById('mobile-bottom-card');
+        if (cardEl) {
+          new ResizeObserver(() => {
+            updateAngleSelectorPosition();
+          }).observe(cardEl);
+        }
+      });
+    }
+
+    function setCameraView(posX, posY, posZ, targetX, targetY, targetZ, animate = true, onComplete = null) {
+      if (!animate) {
+        controls.enabled = false;
+        camera.position.set(posX, posY, posZ);
+        controls.target.set(targetX, targetY, targetZ);
+        camera.lookAt(controls.target);
+        controls.enabled = true;
+        controls.update();
+        if (onComplete) onComplete();
+        return;
+      }
+
+      controls.enabled = false;
+      const startPos = camera.position.clone();
+      const startTarget = controls.target.clone();
+      const endPos = new THREE.Vector3(posX, posY, posZ);
+      const endTarget = new THREE.Vector3(targetX, targetY, targetZ);
+      const startTime = performance.now();
+      const duration = 380;
+
+      function step(now) {
+        const elapsed = now - startTime;
+        const t = Math.min(elapsed / duration, 1.0);
+        const ease = 1 - Math.pow(1 - t, 3);
+
+        camera.position.lerpVectors(startPos, endPos, ease);
+        controls.target.lerpVectors(startTarget, endTarget, ease);
+        camera.lookAt(controls.target);
+
+        if (t < 1.0) {
+          requestAnimationFrame(step);
+        } else {
+          camera.position.copy(endPos);
+          controls.target.copy(endTarget);
+          controls.enabled = true;
+          controls.update();
+          if (onComplete) onComplete();
+        }
+      }
+      requestAnimationFrame(step);
+    }
+
+    function fitCameraToShirt(animate = false) {
+      const isMobile = window.innerWidth < 900 || document.body.classList.contains('preview-iphone-frame');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      if (!width || !height) return;
+
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+      renderer.setSize(width, height, false);
+
+      const halfTan = Math.tan((camera.fov * Math.PI) / 360);
+      // Uniform garment dimensions (height 0.72m, width 0.65m) across Oversized, Hoodie, and Tech
+      // This guarantees identical zoom, framing, and spacing on mobile and desktop!
+      const garmentHeight = 0.72;
+      const garmentWidth = 0.65;
+
+      const distHeight = (garmentHeight / 2) / halfTan;
+      const distWidth = (garmentWidth / 2) / (halfTan * camera.aspect);
+
+      // Comfortable margin so piece never touches navbar or bottom sheet (matches Image 4 hero streetwear presence)
+      targetCameraDistance = Math.max(distHeight, distWidth) * (isMobile ? 1.08 : 1.25);
+      if (!isMobile) targetCameraDistance = Math.max(targetCameraDistance, 1.50);
+
+      // Optical centering: comfortably centers garment between top navbar and angle pills
+      targetCenterY = isMobile ? -0.02 : -0.01;
+      updateAngleSelectorPosition();
+
+      const isBack = btnBack && btnBack.classList.contains('active');
+      const is360 = btn360 && btn360.classList.contains('active');
+
+      if (is360) {
+        const currentAngle = Math.atan2(camera.position.x, camera.position.z);
+        const posX = Math.sin(currentAngle) * targetCameraDistance;
+        const posZ = Math.cos(currentAngle) * targetCameraDistance;
+        setCameraView(posX, targetCenterY, posZ, 0, targetCenterY, 0, animate, () => {
+          controls.autoRotate = true;
+          controls.autoRotateSpeed = 2.2;
+        });
+      } else {
+        const signZ = isBack ? -1 : 1;
+        setCameraView(0, targetCenterY, signZ * targetCameraDistance, 0, targetCenterY, 0, animate);
+      }
+    }
+
+    // --- 3D MODEL LOADING & DYNAMIC SWITCHING ---
+    const dracoLoader = new DRACOLoader();
+    dracoLoader.setDecoderPath('https://www.gstatic.com/draco/versioned/decoders/1.5.6/');
+    const gltfLoader = new GLTFLoader();
+    gltfLoader.setDRACOLoader(dracoLoader);
+
+    const loadedModelsCache = {};
+    let currentModelGroup = null;
+
+    function loadProduct(productKey, animate = false) {
+      state.category = productKey;
+      const prod = PRODUCTS[productKey];
+      if (!prod) return;
+
+      // 1. Update UI Texts & Prices
+      updateProductUI(prod);
+
+      // 2. Select initial color (default to first color of product or retain if present)
+      let matchingColor = prod.colors.find(c => c.hex.toLowerCase() === state.color.toLowerCase());
+      if (!matchingColor) {
+        matchingColor = prod.colors[0];
+      }
+      state.color = matchingColor.hex;
+      state.colorName = matchingColor.name;
+
+      // 3. Render color swatches
+      renderColorSwatches(prod);
+
+      // 4. Update 3D Model
+      // Remove current decals
+      if (state.frontDecalMesh) {
+        scene.remove(state.frontDecalMesh);
+        if (state.frontDecalMesh.geometry) state.frontDecalMesh.geometry.dispose();
+        state.frontDecalMesh = null;
+      }
+      if (state.backDecalMesh) {
+        scene.remove(state.backDecalMesh);
+        if (state.backDecalMesh.geometry) state.backDecalMesh.geometry.dispose();
+        state.backDecalMesh = null;
+      }
+
+      // Remove current model group
+      if (currentModelGroup) {
+        scene.remove(currentModelGroup);
+        currentModelGroup = null;
+      }
+
+      // If already processed in cache, reuse it
+      if (loadedModelsCache[productKey]) {
+        const cached = loadedModelsCache[productKey];
+        currentModelGroup = cached.group;
+        state.shirtMesh = cached.shirtMesh;
+        state.frontMesh = cached.frontMesh;
+        state.backMesh = cached.backMesh;
+        state.modelSizeX = cached.sizeX;
+
+        scene.add(currentModelGroup);
+        applyShirtColor(state.color, state.colorName);
+        updateFrontDecal();
+        updateBackDecal();
+        fitCameraToShirt(animate);
+        return;
+      }
+
+      // Otherwise load via GLTFLoader
+      canvas.classList.add('loading');
+      gltfLoader.load(
+        prod.modelUrl,
+        (gltf) => {
+          canvas.classList.remove('loading');
+
+          const cleanGroup = new THREE.Group();
+          const garmentMeshes = [];
+
+          // Collect ONLY valid garment meshes (ignore Babylon background helpers, lights, skybox)
+          gltf.scene.traverse((child) => {
+            if (child.isMesh && child.geometry && child.name !== 'BackgroundHelper' && !child.name.includes('Background')) {
+              garmentMeshes.push(child);
+            }
+          });
+
+          // Bake all parent transforms directly into each mesh's geometry
+          garmentMeshes.forEach(mesh => {
+            mesh.updateMatrixWorld(true);
+            mesh.geometry = mesh.geometry.clone();
+            mesh.geometry.applyMatrix4(mesh.matrixWorld);
+            mesh.position.set(0, 0, 0);
+            mesh.rotation.set(0, 0, 0);
+            mesh.scale.set(1, 1, 1);
+            cleanGroup.add(mesh);
+          });
+
+          // Rotate to face +Z
+          if (prod.rotateY) {
+            garmentMeshes.forEach(mesh => {
+              mesh.geometry.rotateY(prod.rotateY);
+            });
+          }
+
+          // Exact bounding box of the garment
+          const box = new THREE.Box3().setFromObject(cleanGroup);
+          const size = box.getSize(new THREE.Vector3());
+
+          // Uniform height normalization: exactly 0.72 meters
+          const scaleFactor = 0.72 / (size.y || 1);
+          garmentMeshes.forEach(mesh => {
+            mesh.geometry.scale(scaleFactor, scaleFactor, scaleFactor);
+          });
+
+          // Center geometry vertices precisely at (0, 0, 0)
+          const scaledBox = new THREE.Box3().setFromObject(cleanGroup);
+          const scaledCenter = scaledBox.getCenter(new THREE.Vector3());
+          const finalSize = scaledBox.getSize(new THREE.Vector3());
+
+          garmentMeshes.forEach(mesh => {
+            mesh.geometry.translate(-scaledCenter.x, -scaledCenter.y, -scaledCenter.z);
+          });
+
+          // If Hoodie, pivot sleeves down naturally along the body (seamless shoulder & attached cuffs)
+          if (productKey === 'hoodie') {
+            const angleDeg = 14;
+            const angleRad = angleDeg * Math.PI / 180;
+            const pivotY = 0.18;
+            const leftPivotX = -0.25;
+            const rightPivotX = 0.25;
+
+            garmentMeshes.forEach(mesh => {
+              const pos = mesh.geometry.attributes.position;
+              const matName = (mesh.material && mesh.material.name) ? mesh.material.name : '';
+              let modified = false;
+
+              // Left sleeve (primitive3 / Bordas) - start bending strictly past shoulder seam (|x| > 0.245)
+              if (matName === 'Bordas' || mesh.name.includes('primitive3')) {
+                for (let i = 0; i < pos.count; i++) {
+                  const x = pos.getX(i);
+                  const y = pos.getY(i);
+                  const armDist = Math.max(0, -x - 0.245);
+                  const w = Math.min(armDist / 0.14, 1.0);
+                  const smoothW = w * w * (3 - 2 * w);
+                  const curA = angleRad * smoothW;
+                  const ca = Math.cos(curA), sa = Math.sin(curA);
+                  const dx = x - leftPivotX, dy = y - pivotY;
+                  pos.setXY(i, leftPivotX + (dx * ca - dy * sa), pivotY + (dx * sa + dy * ca));
+                }
+                modified = true;
+              }
+              // Right sleeve (primitive2 / Esquerda) - start bending strictly past shoulder seam (|x| > 0.245)
+              else if (matName === 'Esquerda' || mesh.name.includes('primitive2')) {
+                for (let i = 0; i < pos.count; i++) {
+                  const x = pos.getX(i);
+                  const y = pos.getY(i);
+                  const armDist = Math.max(0, x - 0.245);
+                  const w = Math.min(armDist / 0.14, 1.0);
+                  const smoothW = w * w * (3 - 2 * w);
+                  const curA = -angleRad * smoothW;
+                  const ca = Math.cos(curA), sa = Math.sin(curA);
+                  const dx = x - rightPivotX, dy = y - pivotY;
+                  pos.setXY(i, rightPivotX + (dx * ca - dy * sa), pivotY + (dx * sa + dy * ca));
+                }
+                modified = true;
+              }
+              // Cuffs & Trims (primitive4 / Material #40) - attached to sleeve ends (full angleRad)
+              else if (matName.includes('40') || mesh.name.includes('primitive4')) {
+                for (let i = 0; i < pos.count; i++) {
+                  const x = pos.getX(i);
+                  const y = pos.getY(i);
+                  if (x < -0.37) { // Left cuff
+                    const ca = Math.cos(angleRad), sa = Math.sin(angleRad);
+                    const dx = x - leftPivotX, dy = y - pivotY;
+                    pos.setXY(i, leftPivotX + (dx * ca - dy * sa), pivotY + (dx * sa + dy * ca));
+                    modified = true;
+                  } else if (x > 0.37) { // Right cuff
+                    const ca = Math.cos(-angleRad), sa = Math.sin(-angleRad);
+                    const dx = x - rightPivotX, dy = y - pivotY;
+                    pos.setXY(i, rightPivotX + (dx * ca - dy * sa), pivotY + (dx * sa + dy * ca));
+                    modified = true;
+                  }
+                }
+              }
+
+              if (modified) {
+                pos.needsUpdate = true;
+              }
+            });
+          }
+
+          // Weld duplicate vertices on all meshes and recompute ultra-smooth fabric vertex normals
+          garmentMeshes.forEach(mesh => {
+            const geom = mesh.geometry.clone();
+            geom.deleteAttribute('normal');
+            const merged = BufferGeometryUtils.mergeVertices(geom, 1e-4);
+            merged.computeVertexNormals();
+            mesh.geometry = merged;
+            mesh.geometry.computeBoundingBox();
+            mesh.geometry.computeBoundingSphere();
+          });
+
+          // Identify Front and Back meshes
+          let frontMesh = null;
+          let backMesh = null;
+          let anyMesh = garmentMeshes[0];
+
+          garmentMeshes.forEach((mesh) => {
+            mesh.castShadow = true;
+            mesh.receiveShadow = true;
+
+            const origMatName = (mesh.material && (Array.isArray(mesh.material) ? mesh.material[0].name : mesh.material.name)) || mesh.name || '';
+            if (prod.isFront(mesh, origMatName)) {
+              frontMesh = mesh;
+            } else if (prod.isBack(mesh, origMatName)) {
+              backMesh = mesh;
+            }
+
+            const matOptions = {
+              color: new THREE.Color(state.color),
+              roughness: prod.roughness || 0.82,
+              metalness: 0.0,
+              normalMap: dimonaNormalMap,
+              normalScale: new THREE.Vector2(0.18, 0.18),
+              side: THREE.DoubleSide
+            };
+
+            mesh.material = new THREE.MeshStandardMaterial(matOptions);
+          });
+
+          if (!frontMesh) frontMesh = anyMesh;
+          if (!backMesh) backMesh = anyMesh;
+
+          currentModelGroup = cleanGroup;
+          state.shirtMesh = anyMesh;
+          state.frontMesh = frontMesh;
+          state.backMesh = backMesh;
+          state.modelSizeX = finalSize.x;
+
+          // Cache the processed clean model
+          loadedModelsCache[productKey] = {
+            group: cleanGroup,
+            shirtMesh: anyMesh,
+            frontMesh: frontMesh,
+            backMesh: backMesh,
+            sizeX: finalSize.x
+          };
+
+          scene.add(cleanGroup);
+          applyShirtColor(state.color, state.colorName);
+          updateFrontDecal();
+          updateBackDecal();
+          fitCameraToShirt(animate);
+          updateAngleSelectorPosition();
+        },
+        undefined,
+        (err) => {
+          canvas.classList.remove('loading');
+          console.error('Failed to load 3D model:', err);
+          showToast(`Erro ao carregar modelo 3D`);
+        }
+      );
+    }
+
+    // Deep-linking URL params
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialProd = urlParams.get('prod') || 'oversized';
+    if (urlParams.get('view') === 'mobile') {
+      document.body.classList.add('preview-iphone-frame');
+      const frameIcon = document.getElementById('frame-icon');
+      const frameText = document.getElementById('frame-text');
+      if (frameIcon) frameIcon.textContent = '💻';
+      if (frameText) frameText.textContent = 'Web View';
+    }
+
+    const matchingPill = document.querySelector(`.cat-pill[data-cat="${initialProd}"]`);
+    if (matchingPill) {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      matchingPill.classList.add('active');
+    }
+
+    // Initial Load
+    loadProduct(PRODUCTS[initialProd] ? initialProd : 'oversized', false);
+
+    if (urlParams.get('cart') === '1' || urlParams.get('cart') === 'open') {
+      setTimeout(() => {
+        if (typeof openCartDrawer === 'function') openCartDrawer();
+      }, 400);
+    }
+
+    // --- ANGLE SELECTOR BUTTONS ---
+    const btnFront = document.getElementById('btn-angle-front');
+    const btnBack = document.getElementById('btn-angle-back');
+    const btn360 = document.getElementById('btn-angle-360');
+
+    function setActiveAngle(btn) {
+      [btnFront, btnBack, btn360].forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    btnFront.addEventListener('click', () => {
+      controls.autoRotate = false;
+      setActiveAngle(btnFront);
+      setCameraView(0, targetCenterY, targetCameraDistance, 0, targetCenterY, 0, true);
+    });
+
+    btnBack.addEventListener('click', () => {
+      controls.autoRotate = false;
+      setActiveAngle(btnBack);
+      setCameraView(0, targetCenterY, -targetCameraDistance, 0, targetCenterY, 0, true);
+    });
+
+    btn360.addEventListener('click', () => {
+      setActiveAngle(btn360);
+      controls.autoRotate = true;
+      controls.autoRotateSpeed = 2.2;
+    });
+
+    controls.addEventListener('start', () => {
+      if (btn360 && btn360.classList.contains('active')) {
+        controls.autoRotate = false;
+      }
+    });
+
+    controls.addEventListener('end', () => {
+      if (btn360 && btn360.classList.contains('active')) {
+        controls.autoRotate = true;
+      }
+    });
+
+    // --- SIZE SELECTOR SYNC ---
+    const allSizeBtns = document.querySelectorAll('.size-pill-web, .size-pill-mob');
+    const checkoutSelectedSize = document.getElementById('checkout-selected-size');
+
+    allSizeBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const sz = btn.getAttribute('data-size');
+        state.size = sz;
+        if (checkoutSelectedSize) checkoutSelectedSize.textContent = sz;
+
+        allSizeBtns.forEach(b => {
+          if (b.getAttribute('data-size') === sz) {
+            b.classList.add('active');
+          } else {
+            b.classList.remove('active');
+          }
+        });
+      });
+    });
+
+    // --- CATEGORY PILLS (DYNAMIC SWITCHING: OVERSIZED / HOODIE / TECH) ---
+    const catPills = document.querySelectorAll('.cat-pill');
+    const catDot = document.getElementById('cat-dot');
+    const categoryBar = document.getElementById('category-pills-bar');
+
+    function updateCatDot(activePill) {
+      if (!activePill || !catDot || !categoryBar) return;
+      const pillRect = activePill.getBoundingClientRect();
+      const barRect = categoryBar.getBoundingClientRect();
+      const offsetLeft = pillRect.left - barRect.left + (pillRect.width / 2) - 13;
+      catDot.style.transform = `translateX(${offsetLeft}px)`;
+    }
+
+    catPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        catPills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        updateCatDot(pill);
+
+        const cat = pill.getAttribute('data-cat');
+        loadProduct(cat, true);
+      });
+    });
+
+    // Set initial dot position
+    const initialActivePill = document.querySelector('.cat-pill.active');
+    if (initialActivePill) updateCatDot(initialActivePill);
+
+    // --- FULL CART SYSTEM & DRAWER (SLIDE-IN ESQUERDA -> DIREITA) ---
+    const cartState = {
+      items: [
+        {
+          id: 'item_initial_oversized',
+          productKey: 'oversized',
+          title: 'Oversized Streetwear T-Shirt',
+          color: '#1a1a1c',
+          colorName: 'Preto Carvão',
+          size: 'G',
+          priceNum: 159.0,
+          quantity: 1
+        }
+      ],
+      coupon: null,
+      discountPercent: 0
+    };
+
+    const cartDrawer = document.getElementById('cart-drawer');
+    const cartOverlay = document.getElementById('cart-drawer-overlay');
+    const btnCloseCart = document.getElementById('btn-close-cart');
+    const btnOpenBag = document.getElementById('btn-open-bag');
+    const btnAddBagDesktop = document.getElementById('btn-add-bag-desktop');
+    const btnAddBagMob = document.getElementById('btn-add-bag-mob');
+    const btnCartCheckout = document.getElementById('btn-cart-checkout');
+    const btnApplyCoupon = document.getElementById('btn-apply-coupon');
+    const couponInput = document.getElementById('cart-coupon-input');
+    const couponMsg = document.getElementById('coupon-msg');
+
+    function openCartDrawer() {
+      renderCart();
+      if (cartOverlay) cartOverlay.classList.add('active');
+      if (cartDrawer) cartDrawer.classList.add('open');
+    }
+
+    function closeCartDrawer() {
+      if (cartOverlay) cartOverlay.classList.remove('active');
+      if (cartDrawer) cartDrawer.classList.remove('open');
+    }
+
+    function updateCartCountBadge() {
+      const totalQty = cartState.items.reduce((acc, item) => acc + item.quantity, 0);
+      const bagBadge = document.getElementById('bag-count');
+      const headerCount = document.getElementById('cart-header-count');
+      if (bagBadge) {
+        bagBadge.textContent = totalQty;
+        bagBadge.classList.remove('cart-bump');
+        void bagBadge.offsetWidth;
+        bagBadge.classList.add('cart-bump');
+      }
+      if (headerCount) {
+        headerCount.textContent = totalQty === 1 ? '1 item' : `${totalQty} itens`;
+      }
+    }
+
+    function addToCartCurrentConfig(openDrawer = true) {
+      const prod = PRODUCTS[state.category];
+      if (!prod) return;
+
+      const priceNumeric = parseFloat(prod.price.replace(/[^0-9,]/g, '').replace(',', '.'));
+
+      const existing = cartState.items.find(item => 
+        item.productKey === state.category &&
+        item.color.toLowerCase() === state.color.toLowerCase() &&
+        item.size === state.size
+      );
+
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cartState.items.push({
+          id: 'item_' + Date.now() + '_' + Math.random().toString(36).substr(2, 4),
+          productKey: state.category,
+          title: prod.titleFlat,
+          color: state.color,
+          colorName: state.colorName,
+          size: state.size,
+          priceNum: priceNumeric,
+          quantity: 1
+        });
+      }
+
+      updateCartCountBadge();
+      renderCart();
+      showToast(`${prod.titleFlat} adicionado à sacola!`);
+
+      if (openDrawer) {
+        openCartDrawer();
+      }
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cart-items-container');
+      const footer = document.getElementById('cart-drawer-footer');
+      if (!container) return;
+
+      if (cartState.items.length === 0) {
+        container.innerHTML = `
+          <div class="cart-empty-state">
+            <div class="cart-empty-icon">🛍️</div>
+            <h3 class="cart-empty-title">Sua sacola está vazia</h3>
+            <p class="cart-empty-sub">Explore nossos lançamentos streetwear e garanta seu frete grátis.</p>
+            <button class="cart-explore-btn" id="btn-explore-cart">Explorar Coleção</button>
+          </div>
+        `;
+        if (footer) footer.style.display = 'none';
+        const exploreBtn = document.getElementById('btn-explore-cart');
+        if (exploreBtn) exploreBtn.addEventListener('click', closeCartDrawer);
+        return;
+      }
+
+      if (footer) footer.style.display = 'flex';
+
+      let itemsHtml = '';
+      let subtotal = 0;
+
+      cartState.items.forEach(item => {
+        const itemTotal = item.priceNum * item.quantity;
+        subtotal += itemTotal;
+
+        let iconSymbol = '👕';
+        if (item.productKey === 'hoodie') iconSymbol = '🧥';
+        else if (item.productKey === 'tech') iconSymbol = '⚡';
+
+        const isLight = ['#f3eedf', '#ede8db', '#ede9de', '#f5f5f5', '#ffffff'].includes(item.color.toLowerCase());
+
+        itemsHtml += `
+          <div class="cart-item-card" data-id="${item.id}">
+            <div class="cart-item-thumb" style="background: ${item.color}; color: ${isLight ? '#000000' : '#ffffff'};">
+              <span style="font-size: 24px;">${iconSymbol}</span>
+            </div>
+            <div class="cart-item-info">
+              <div class="cart-item-title">${item.title}</div>
+              <div class="cart-item-meta">
+                <span class="cart-item-color-dot" style="background: ${item.color};"></span>
+                <span>${item.colorName}</span>
+                <span>•</span>
+                <b>Tam ${item.size}</b>
+              </div>
+              <div class="cart-item-price">R$ ${item.priceNum.toFixed(2).replace('.', ',')}</div>
+              <div class="cart-item-actions">
+                <div class="cart-qty-pill">
+                  <button class="cart-qty-btn btn-qty-minus" data-id="${item.id}">−</button>
+                  <span class="cart-qty-num">${item.quantity}</span>
+                  <button class="cart-qty-btn btn-qty-plus" data-id="${item.id}">+</button>
+                </div>
+                <button class="cart-item-remove btn-item-del" data-id="${item.id}" title="Remover item">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="3 6 5 6 21 6"></polyline>
+                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = itemsHtml;
+
+      container.querySelectorAll('.btn-qty-plus').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const item = cartState.items.find(i => i.id === id);
+          if (item) {
+            item.quantity += 1;
+            updateCartCountBadge();
+            renderCart();
+          }
+        });
+      });
+
+      container.querySelectorAll('.btn-qty-minus').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const item = cartState.items.find(i => i.id === id);
+          if (item) {
+            item.quantity -= 1;
+            if (item.quantity <= 0) {
+              cartState.items = cartState.items.filter(i => i.id !== id);
+            }
+            updateCartCountBadge();
+            renderCart();
+          }
+        });
+      });
+
+      container.querySelectorAll('.btn-item-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          cartState.items = cartState.items.filter(i => i.id !== id);
+          updateCartCountBadge();
+          renderCart();
+        });
+      });
+
+      let discount = 0;
+      if (cartState.discountPercent > 0) {
+        discount = subtotal * cartState.discountPercent;
+      }
+      const total = subtotal - discount;
+
+      const subtotalEl = document.getElementById('cart-subtotal-val');
+      const discountRow = document.getElementById('cart-discount-row');
+      const discountVal = document.getElementById('cart-discount-val');
+      const totalEl = document.getElementById('cart-total-val');
+      const installmentsEl = document.getElementById('cart-installments-val');
+      const checkoutBtn = document.getElementById('btn-cart-checkout');
+
+      if (subtotalEl) subtotalEl.textContent = `R$ ${subtotal.toFixed(2).replace('.', ',')}`;
+      if (discountRow) {
+        if (discount > 0) {
+          discountRow.style.display = 'flex';
+          discountVal.textContent = `- R$ ${discount.toFixed(2).replace('.', ',')}`;
+        } else {
+          discountRow.style.display = 'none';
+        }
+      }
+      if (totalEl) totalEl.textContent = `R$ ${total.toFixed(2).replace('.', ',')}`;
+      if (installmentsEl) {
+        const installmentVal = (total / 3).toFixed(2).replace('.', ',');
+        installmentsEl.textContent = `em até 3x de R$ ${installmentVal} sem juros ou 5% OFF no PIX`;
+      }
+      if (checkoutBtn) {
+        const textSpan = checkoutBtn.querySelector('span');
+        if (textSpan) textSpan.textContent = `Finalizar Compra — R$ ${total.toFixed(2).replace('.', ',')}`;
+      }
+    }
+
+    // Coupon Handler
+    if (btnApplyCoupon && couponInput) {
+      btnApplyCoupon.addEventListener('click', () => {
+        const code = (couponInput.value || '').trim().toUpperCase();
+        if (code === 'ICEOUT10' || code === 'ICEOUT') {
+          cartState.coupon = code;
+          cartState.discountPercent = 0.10;
+          if (couponMsg) {
+            couponMsg.style.display = 'flex';
+            couponMsg.innerHTML = `<span>✓ Cupom <b>${code}</b> aplicado (-10%)</span><button id="btn-remove-coupon" style="background:none; border:none; color:#8e8e93; cursor:pointer;">&times;</button>`;
+            document.getElementById('btn-remove-coupon').addEventListener('click', () => {
+              cartState.coupon = null;
+              cartState.discountPercent = 0;
+              couponMsg.style.display = 'none';
+              couponInput.value = '';
+              renderCart();
+            });
+          }
+          showToast('Cupom de 10% aplicado!');
+          renderCart();
+        } else {
+          alert('Cupom inválido. Use ICEOUT10 para 10% de desconto!');
+        }
+      });
+    }
+
+    // --- CHECKOUT & PIX MODAL ---
+    const checkoutModal = document.getElementById('checkout-modal');
+    const btnCtaDesktop = document.getElementById('btn-cta-desktop');
+    const btnCtaMobile = document.getElementById('btn-cta-mobile');
+    const btnCloseCheckout = document.getElementById('btn-close-checkout');
+
+    function openCheckout(fromCart = false) {
+      if (fromCart) {
+        closeCartDrawer();
+      }
+
+      let totalAmount = 0;
+      if (cartState.items.length > 0) {
+        let subtotal = cartState.items.reduce((acc, item) => acc + (item.priceNum * item.quantity), 0);
+        let discount = subtotal * cartState.discountPercent;
+        totalAmount = subtotal - discount;
+        
+        const count = cartState.items.reduce((acc, item) => acc + item.quantity, 0);
+        document.getElementById('checkout-product-name').textContent = `Sacola ICE OUT CLUB (${count} ${count === 1 ? 'item' : 'itens'})`;
+        document.getElementById('checkout-selected-size').textContent = cartState.items.map(i => i.size).join(', ');
+      } else {
+        const prod = PRODUCTS[state.category];
+        totalAmount = parseFloat(prod.price.replace(/[^0-9,]/g, '').replace(',', '.'));
+        document.getElementById('checkout-product-name').textContent = prod.titleFlat;
+        document.getElementById('checkout-selected-size').textContent = state.size;
+      }
+
+      document.getElementById('checkout-pix-amount').textContent = `R$ ${totalAmount.toFixed(2).replace('.', ',')}`;
+      checkoutModal.classList.add('active');
+    }
+
+    function closeCheckout() {
+      checkoutModal.classList.remove('active');
+    }
+
+    async function startStripeCheckout() {
+      if (cartState.items.length === 0) {
+        showToast('Adicione produtos à sua sacola primeiro!');
+        return;
+      }
+
+      const checkoutBtn = document.getElementById('btn-cart-checkout');
+      const originalText = checkoutBtn ? checkoutBtn.innerHTML : '';
+      if (checkoutBtn) {
+        checkoutBtn.disabled = true;
+        checkoutBtn.style.opacity = '0.7';
+        checkoutBtn.innerHTML = `<span>Iniciando Checkout...</span><span>⏳</span>`;
+      }
+
+      try {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            cart: cartState.items,
+            origin: window.location.origin
+          })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.url) {
+          window.location.href = data.url;
+        } else {
+          console.warn('Stripe checkout info:', data);
+          openCheckout(true);
+          if (data.error && data.error.includes('STRIPE_SECRET_KEY')) {
+            showToast('Modo Demonstração: insira a chave da Stripe para pagamentos reais.');
+          } else if (data.error) {
+            showToast(data.error);
+          }
+        }
+      } catch (err) {
+        console.warn('Backend indisponível, usando modal local:', err);
+        openCheckout(true);
+      } finally {
+        if (checkoutBtn) {
+          checkoutBtn.disabled = false;
+          checkoutBtn.style.opacity = '1';
+          checkoutBtn.innerHTML = originalText;
+        }
+      }
+    }
+
+    // Attach Event Listeners
+    if (btnCtaDesktop) btnCtaDesktop.addEventListener('click', () => addToCartCurrentConfig(true));
+    if (btnCtaMobile) btnCtaMobile.addEventListener('click', () => addToCartCurrentConfig(true));
+    if (btnOpenBag) btnOpenBag.addEventListener('click', openCartDrawer);
+    if (btnCloseCart) btnCloseCart.addEventListener('click', closeCartDrawer);
+    if (cartOverlay) cartOverlay.addEventListener('click', closeCartDrawer);
+    if (btnCartCheckout) btnCartCheckout.addEventListener('click', startStripeCheckout);
+    if (btnCloseCheckout) btnCloseCheckout.addEventListener('click', closeCheckout);
+
+    checkoutModal.addEventListener('click', (e) => {
+      if (e.target === checkoutModal) closeCheckout();
+    });
+
+    document.getElementById('btn-copy-pix').addEventListener('click', () => {
+      navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136pix@iceoutclub.com.br520400005303986');
+      showToast('Chave Pix oficial copiada com sucesso!');
+    });
+
+    document.getElementById('btn-view-dimona-order').addEventListener('click', () => {
+      const prod = PRODUCTS[state.category];
+      alert(`Ordem de Confecção Streetwear — ICE OUT CLUB:\n\n` +
+            `• Produto: ${prod.titleFlat}\n` +
+            `• SKU Confecção: ${prod.sku}\n` +
+            `• Cor: ${state.colorName} (${state.color})\n` +
+            `• Tamanho: ${state.size}\n` +
+            `• Preço: ${prod.price}\n` +
+            `• Estampa Frontal: 300 DPI Decal Centralizado\n` +
+            `• Estampa Traseira: 300 DPI Decal Oversized`);
+    });
+
+    // Initialize Cart Badge
+    updateCartCountBadge();
+
+    // --- TOGGLE FRAME (PC TESTING) ---
+    const btnToggleFrame = document.getElementById('btn-toggle-frame');
+    const frameIcon = document.getElementById('frame-icon');
+    const frameText = document.getElementById('frame-text');
+
+    btnToggleFrame.addEventListener('click', () => {
+      document.body.classList.toggle('preview-iphone-frame');
+      const isPhone = document.body.classList.contains('preview-iphone-frame');
+      frameIcon.textContent = isPhone ? '💻' : '📱';
+      frameText.textContent = isPhone ? 'Web View' : 'Mobile View';
+
+      setTimeout(() => {
+        fitCameraToShirt(true);
+        const activePill = document.querySelector('.cat-pill.active');
+        if (activePill) updateCatDot(activePill);
+      }, 100);
+    });
+
+    // --- WINDOW RESIZE ---
+    window.addEventListener('resize', () => {
+      fitCameraToShirt(false);
+      const activePill = document.querySelector('.cat-pill.active');
+      if (activePill) updateCatDot(activePill);
+    });
+
+    // --- RENDER LOOP ---
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+
+    // Public API
+    window.openCartDrawer = openCartDrawer;
+    window.closeCartDrawer = closeCartDrawer;
+    window.addToCartCurrentConfig = addToCartCurrentConfig;
+    window.cartState = cartState;
+    window.renderCart = renderCart;
+    window.THREE = THREE;
+    window.__DEBUG = { THREE, scene, camera, controls, state, PRODUCTS, loadedModelsCache, loadProduct, openCartDrawer, closeCartDrawer, cartState, renderCart };
+  </script>
+</body>
+</html>

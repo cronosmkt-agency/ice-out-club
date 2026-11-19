@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pedido Confirmado — ICE OUT CLUB</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      background-color: #f4f4f7;
+      color: #111112;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .success-card {
+      background: #ffffff;
+      max-width: 480px;
+      width: 100%;
+      border-radius: 28px;
+      padding: 40px 32px;
+      box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+      text-align: center;
+      position: relative;
+    }
+
+    .brand-logo {
+      height: 28px;
+      object-fit: contain;
+      margin-bottom: 28px;
+    }
+
+    .icon-badge {
+      width: 72px;
+      height: 72px;
+      background: #111112;
+      color: #ffffff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px auto;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+    }
+
+    .icon-badge svg {
+      width: 36px;
+      height: 36px;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 10px;
+    }
+
+    p.subtitle {
+      font-size: 15px;
+      color: #636366;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .order-box {
+      background: #f7f7f9;
+      border-radius: 16px;
+      padding: 16px;
+      margin-bottom: 28px;
+      text-align: left;
+      font-size: 13px;
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
+
+    .order-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .order-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .order-label {
+      color: #8e8e93;
+      font-weight: 500;
+    }
+
+    .order-val {
+      color: #111112;
+      font-weight: 600;
+      font-family: monospace;
+      font-size: 12px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 600;
+      font-size: 12px;
+      padding: 4px 10px;
+      border-radius: 9999px;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      background: #2e7d32;
+      border-radius: 50%;
+    }
+
+    .btn-return {
+      display: block;
+      width: 100%;
+      height: 52px;
+      line-height: 52px;
+      background: #111112;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 9999px;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-return:hover {
+      background: #2c2c2e;
+      transform: translateY(-1px);
+    }
+
+    .footer-note {
+      font-size: 12px;
+      color: #8e8e93;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="success-card">
+    <img src="iceout_logo_dripping.png" alt="ICE OUT CLUB" class="brand-logo">
+
+    <div class="icon-badge">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"></polyline>
+      </svg>
+    </div>
+
+    <h1>Pedido Confirmado!</h1>
+    <p class="subtitle">O pagamento foi aprovado com sucesso. Sua peça exclusiva já entrou na fila de confecção e estamparia.</p>
+
+    <div class="order-box">
+      <div class="order-row">
+        <span class="order-label">Status</span>
+        <span class="status-badge"><span class="status-dot"></span> Pago & Em Produção</span>
+      </div>
+      <div class="order-row">
+        <span class="order-label">Identificador</span>
+        <span class="order-val" id="session-display">Processando...</span>
+      </div>
+      <div class="order-row">
+        <span class="order-label">Confirmação</span>
+        <span class="order-val">Enviada por E-mail</span>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn-return">Voltar para a Loja</a>
+
+    <p class="footer-note">Dúvidas? Entre em contato com o suporte da ICE OUT CLUB.</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const sessionId = params.get('session_id') || ('IOC-' + Math.random().toString(36).substr(2, 9).toUpperCase());
+    const displayEl = document.getElementById('session-display');
+    if (displayEl) {
+      displayEl.textContent = sessionId.length > 22 ? sessionId.substring(0, 20) + '...' : sessionId;
+    }
+
+    // Limpa o carrinho local pois o pedido foi concluído
+    try {
+      localStorage.removeItem('iceout_cart');
+    } catch(e) {}
+  </script>
+</body>
+</html>
